@@ -1,0 +1,67 @@
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Last Name: First Name: Age: House Number: Street Name: Town: Zip Code: 
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $110.45 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Doe $110.45
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $20.35 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Last Name: First Name: Age: House Number: Street Name: Town: Zip Code: 
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Patterson $0.00
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $25.40 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Donor Info:
+Dave Patterson: age 50
+122 Telegraph
+Oakland 94601
+Current Amount Donated: $25.40
+
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $155.20 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Donor Info:
+Dave Patterson: age 50
+122 Telegraph
+Oakland 94601
+Current Amount Donated: $180.60
+
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Patterson $180.60
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 

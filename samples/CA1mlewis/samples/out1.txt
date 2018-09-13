@@ -1,0 +1,105 @@
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: Command not recognized. Please try again.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $1000.00 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+[empty] $1000.00
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $200.00 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $34.50 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $0.06 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+[empty] $1234.56
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Donor Info:
+[empty] [empty]: age -1
+0 [empty]
+[empty] -----
+Current Amount Donated: $1234.56
+
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Last Name: First Name: Age: House Number: Street Name: Town: Zip Code: 
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Donor Info:
+Juan Rodriquez: age 21
+55 Pine
+Vestal 13850
+Current Amount Donated: $0.00
+
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Rodriquez $0.00
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Enter Amount to Donate: $5.00 donated.
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
+Rodriquez $5.00
+
+Enter a command. 
+Choose from ["New" "Update" "View" "Donate" "Report" "Quit"]
+: 
