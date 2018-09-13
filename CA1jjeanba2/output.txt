@@ -1,0 +1,29 @@
+Enter the command you would like to execute: 
+What is your last name? What is your first name? How old are you (in years)? What is your street number? What is your street name? What's the name of your town? What's the zip code? How much are you donating? Enter the command you would like to execute: 
+That's not one of the commands we expected.
+Enter the command you would like to execute: 
+Last name: Jean-Baptiste
+First name: Junhson
+Age: 20
+Street number: 51
+Street name: FakeStreet
+Town: FakeTown
+Zip code: 12345
+Amount donated: $300.00
+Enter the command you would like to execute: 
+Jean-Baptiste $300.00
+Enter the command you would like to execute: 
+What is your last name? What is your first name? How old are you (in years)? What is your street number? What is your street name? What's the name of your town? What's the zip code? Enter the command you would like to execute: 
+That's not one of the commands we expected.
+Enter the command you would like to execute: 
+Last name: Jean
+First name: June
+Age: 21
+Street number: 52
+Street name: StreetFake
+Town: TownFake
+Zip code: 12346
+Amount donated: $300.00
+Enter the command you would like to execute: 
+Jean $300.00
+Enter the command you would like to execute: 

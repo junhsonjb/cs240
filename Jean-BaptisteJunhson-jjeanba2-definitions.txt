@@ -1,0 +1,9 @@
+1. rmdir - The rmdir command removes empty directories. enter the name of the empty directory after the rmdir keyword.
+
+2. mv - The mv command moves files or renames them. The --backup flag creates backups of all of the destination files.
+
+3. find - The find command finds files within a folder or that folder's subfolders.
+
+4. more - The more command helps with viewing files. It displays as much of the file that fits on one screen.
+
+5. ls - The ls command lists out all of the files and directories inside of the current directory. The -i flag prints the index number of each file.
