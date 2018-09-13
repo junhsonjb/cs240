@@ -2,31 +2,38 @@
 
 void new_info(string &last, string &first, int &age, int &street_num, string &street_name, string &town, string &zip_code, float &amount_donated) {
 
- 	cout << "What is your last name? ";
- 	getline(cin, last);
+ 	cout << "Last Name: ";
+ 	// getline(cin, last);
+	cin >> last;
 
-	cout << "What is your first name? ";
-	getline(cin, first);
+	cout << "First Name: ";
+	// getline(cin, first);
+	cin >> first;
 
-	cout << "How old are you (in years)? ";
+	cout << "Age: ";
 	cin >> age;
-	cin.ignore();
+	// cin.ignore();
 
-	cout << "What is your street number? ";
+	cout << "House Number: ";
 	cin >> street_num;
-	cin.ignore();
+	// cin.ignore();
 
-	cout << "What is your street name? ";
-	getline(cin, street_name);
+	cout << "Street Name: ";
+	// getline(cin, street_name);
+	cin >> street_name;
+	
+	cout << "Town: ";
+	// getline(cin, town);
+	cin >> town;
 
-	cout << "What's the name of your town? ";
-	getline(cin, town);
-
-	cout << "What's the zip code? ";
+	cout << "Zip Code: ";
 	cin >> zip_code;
 
-	cout << "How much are you donating? ";
-	cin >> amount_donated;
+	// zero out the amount donated
+	amount_donated = 0;
+
+	// print a new line
+	cout << endl;
 
 } 
 
@@ -38,50 +45,56 @@ void update_info(string &last, string &first, int &age, int &street_num, string 
 	// cin >> last >> first >> age >> street_num >> street_name >> town >> zip_code;
 
 	
- 	cout << "What is your last name? ";
- 	getline(cin, last);
+ 	cout << "Last Name: ";
+ 	// getline(cin, last);
+	cin >> last;
 
-	cout << "What is your first name? ";
-	getline(cin, first);
+	cout << "First Name: ";
+	// getline(cin, first);
+	cin >> first;
 
-	cout << "How old are you (in years)? ";
+	cout << "Age: ";
 	cin >> age;
-	cin.ignore();
+	// cin.ignore();
 
-	cout << "What is your street number? ";
+	cout << "House Number: ";
 	cin >> street_num;
-	cin.ignore();
+	// cin.ignore();
 
-	cout << "What is your street name? ";
-	getline(cin, street_name);
+	cout << "Street Name: ";
+	// getline(cin, street_name);
+	cin >> street_name;
+	
+	cout << "Town: ";
+	// getline(cin, town);
+	cin >> town;
 
-	cout << "What's the name of your town? ";
-	getline(cin, town);
-
-	cout << "What's the zip code? ";
+	cout << "Zip Code: ";
 	cin >> zip_code;
+
+	// print a new line
+	cout << endl;
 
 } 
 
 void view_info(string last, string first, int age, int street_num, string street_name, string town, string zip_code, float amount_donated) {
 
-	cout << "Last name: " << last << endl;
-	cout << "First name: " << first << endl;
-	cout << "Age: " << age << endl;
-	cout << "Street number: " << street_num << endl;
-	cout << "Street name: " << street_name << endl;
-	cout << "Town: " << town << endl;
-	cout << "Zip code: " << zip_code << endl;
-	// cout << "Amount donated: " << amount_donated << endl;
-	printf("Amount donated: $%.2f\n", amount_donated);
+	cout << endl << "Donor Info:" << endl;
+	cout << first << " " << last << ": age " << age << endl;
+	cout << street_num << " " << street_name << endl;
+	cout << town << " " << zip_code << endl;
+	cout << "Current Amount Donated: "; printf("$%.2f", amount_donated);
+
+	// print a new line
+	cout << endl;
 
 }
 
 void donate(float &amount_donated) {
 
-	cout << "Enter the amount of money you would like to add: " << endl;
+	float amount_to_add;
 
-	int amount_to_add;
+	cout << "Enter Amount to Donate: ";
 	cin >> amount_to_add;
 
 	amount_donated += amount_to_add;
@@ -92,5 +105,8 @@ void report_info(string last, float amount_donated) {
 
 	cout << last << " ";
 	printf("$%.2f\n", last, amount_donated);
+
+	// print a new line
+	cout << endl;
 
 }

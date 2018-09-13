@@ -15,9 +15,11 @@ int main() {
 
 	while (!quitProgram) {
 		
-		cout << "Enter the command you would like to execute: " << endl;
-		getline(cin, inputText);
-		// cin >> inputText;
+		cout << endl << "Enter a command. " << endl;
+		cout << "Choose from [\"New\" \"Update\" \"View\" \"Donate\" \"Report\" \"Quit\"]" << endl;
+		cout << ": ";
+		// getline(cin, inputText);
+		cin >> inputText;
 		// cin.ignore();
 	
 		if (inputText == "New") new_info(last, first, age, street_num, street_name, town, zip_code, amount_donated);
@@ -27,7 +29,7 @@ int main() {
 		else if (inputText == "Report") report_info(last, amount_donated);
 		else if (inputText == "Quit") quitProgram = true;
 		else
-			cout << "That's not one of the commands we expected." << endl;
+			cout << endl << "That's not one of the commands we expected." << endl << endl;
 	
 	}
 
