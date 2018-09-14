@@ -104,7 +104,7 @@ void donate(float &amount_donated) {
 void report_info(string last, float amount_donated) {
 
 	cout << last << " ";
-	printf("$%.2f\n", last, amount_donated);
+	printf("$%.2f\n", amount_donated);
 
 	// print a new line
 	cout << endl;
