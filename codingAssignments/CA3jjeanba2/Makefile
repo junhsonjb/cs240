@@ -6,7 +6,7 @@ main: main.o Node.o LLC.o
 	g++ main.o Node.o LLC.o -o main
 
 main.o: main.cpp
-	g++ main.cpp
+	g++ main.cpp LLC.cpp
 
 Node.o: Node.cpp
 	g++ Node.cpp

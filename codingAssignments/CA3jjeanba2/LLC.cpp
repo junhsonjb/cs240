@@ -17,7 +17,7 @@ LLC::LLC() {
 LLC::LLC(const LLC & source) {
 
 	Node * temp;
-	for (temp = source->first; temp != nullptr; temp = temp->next)
+	for (temp = source.first; temp != nullptr; temp = temp->next)
 	{
 
 		// insert a new node with the data from the
@@ -29,7 +29,7 @@ LLC::LLC(const LLC & source) {
 }
 
 
-LLC & LLC::operator=(const string & value) {
+LLC & LLC::operator=(const LLC & source) {
 
 	// similar to copy constructor,
 	// except you make a new LLC,
@@ -39,19 +39,19 @@ LLC & LLC::operator=(const string & value) {
 
 }
 
-LLC::~LLC() {
-
-	// Need to delete each node from the heap
-	
-	//Node * current, * upcoming, * pos;
-
-	//for (pos = first; pos != nullptr; pos = pos->next) {
-
-	//	
-
-	//}
-
-}
+//LLC::~LLC() {
+//
+//	// Need to delete each node from the heap
+//	
+//	//Node * current, * upcoming, * pos;
+//
+//	//for (pos = first; pos != nullptr; pos = pos->next) {
+//
+//	//	
+//
+//	//}
+//
+//}
 
 bool LLC::contains(const string & value) {
 
@@ -84,6 +84,10 @@ bool LLC::insert(const string & value) {
 	// then change the next property to be
 	// the newly created node
 
+	// cout << value << endl; // this line needs to go (testing)
+
+	// Node * newNode;
+	// newNode->data = value;
 	Node * newNode(value);
 
 	// if there is no first, make newNode the new first (and last)
@@ -146,7 +150,21 @@ bool LLC::remove(const string & value) {
 
 }
 
+bool LLC::shuffle() {
 
+	// Need to randomly shuffle list elements!
+
+	vector<string> stringlist;
+	Node * temp;
+	for (temp = first; temp != nullptr; temp = temp->next) {
+		stringlist.push_back(temp->data);
+	}
+
+	return false;
+	// come back and finish this
+
+
+}
 
 
 

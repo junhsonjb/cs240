@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <vector>
 #include "Node.h"
 
 using namespace std;
@@ -17,7 +18,7 @@ class LLC {
 		LLC(); // constructor - creates an empty list
 		LLC(const LLC & source); // copy constructor
 		LLC & operator=(const LLC & source); // assignment operator
-		~LLC(); // destructor
+		//~LLC(); // destructor
 		bool contains(const string & value);
 		bool insert(const string & value);
 		bool remove(const string & value); // check return value with teacher
