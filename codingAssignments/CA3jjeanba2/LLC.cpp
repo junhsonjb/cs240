@@ -30,7 +30,7 @@ LLC::LLC(const LLC & source) {
 }
 
 
-LLC LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
+LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 
 	// similar to copy constructor,
 	// except you make a new LLC,
@@ -38,14 +38,25 @@ LLC LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 	// return the new LLC object that you just made!
 	// use insert() !
 
-	LLC newlist;
-	Node * temp;
 
-	for (temp = first; temp != nullptr; temp = temp->next) {
-		newlist.insert(temp->data);
+	LLC newlist;
+
+	if (this != & source) {
+
+		Node * newNode;	
+		Node * temp = source.first;
+		first = temp;
+		last = temp; // since temp is the only element FOR NOW
+
+		for (temp = source.first->next; temp != nullptr; temp = temp->next) {
+			newNode = new Node(temp->data);
+			last->next = newNode;
+			last = newNode;
+		}
+
 	}
 
-	return newlist;
+	return * this;
 
 }
 
@@ -67,9 +78,25 @@ LLC LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 LLC::~LLC() {
 
 	Node * temp;
-	for (temp = first; temp != nullptr; temp = temp->next) {
-		remove(temp->data);
+	Node * prev = nullptr;
+
+	temp = first;
+	while (temp != nullptr) {
+
+		if (prev)
+			delete(prev);
+		
+
+		// shift pointers for the next iteration
+		prev = temp;
+		temp = temp->next;
+
 	}
+
+
+	// now, the only remaining node is the last node,
+	// which we have a pointer to already
+	delete(last);
 
 }
 

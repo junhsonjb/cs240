@@ -17,7 +17,7 @@ class LLC {
 		// Member functions (and one friend!)
 		LLC(); // constructor - creates an empty list
 		LLC(const LLC & source); // copy constructor
-		LLC operator=(const LLC & source); // assignment operator
+		LLC & operator=(const LLC & source); // assignment operator
 		~LLC(); // destructor
 		bool contains(const string & value);
 		bool insert(const string & value);
