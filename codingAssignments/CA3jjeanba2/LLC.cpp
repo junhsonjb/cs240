@@ -32,31 +32,54 @@ LLC::LLC(const LLC & source) {
 
 LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 
-	// similar to copy constructor,
-	// except you make a new LLC,
-	// do all the storing into that and then
-	// return the new LLC object that you just made!
-	// use insert() !
-
-
-	LLC newlist;
-
 	if (this != & source) {
 
-		Node * newNode;	
-		Node * temp = source.first;
-		first = temp;
-		last = temp; // since temp is the only element FOR NOW
+		// must first delete all data currently in this LLC
 
-		for (temp = source.first->next; temp != nullptr; temp = temp->next) {
-			newNode = new Node(temp->data);
-			last->next = newNode;
-			last = newNode;
+		Node * curr, * prev;
+		
+		curr = first;
+		prev = nullptr;
+
+		while (curr != nullptr) {
+
+			if (prev)
+				delete(prev);
+
+			// shift curr and prev pointers
+			prev = curr;
+			curr = curr->next;
+
 		}
 
-	}
+		delete(last);
 
-	return * this;
+		// now we can copy source to this LLC
+
+		if (source.first == nullptr)
+			return * this;
+
+		Node * newNode, * temp;
+		temp = source.first;
+
+		newNode = new Node(temp->data);
+		first = newNode;
+		last = newNode;
+		
+		if (temp->next == nullptr)
+			return * this;
+
+		for (temp = temp->next; temp != nullptr; temp = temp->next) {
+
+			newNode = new Node(temp->data);
+			last->next = newNode;
+			last = last->next;
+
+		}
+
+		return * this;
+
+	}
 
 }
 
@@ -79,13 +102,16 @@ LLC::~LLC() {
 
 	Node * temp;
 	Node * prev = nullptr;
+	Node * del;
 
 	temp = first;
 	while (temp != nullptr) {
 
-		if (prev)
-			delete(prev);
-		
+		if (prev) {
+			del = prev;
+			// cout << "deleting " << del-> data << endl; // for testing
+			delete(del);
+		}
 
 		// shift pointers for the next iteration
 		prev = temp;
@@ -96,7 +122,10 @@ LLC::~LLC() {
 
 	// now, the only remaining node is the last node,
 	// which we have a pointer to already
-	delete(last);
+	del = prev;
+	// cout << "finally deleting " << del->data << endl; // for testing
+	delete(del);
+
 
 }
 
@@ -214,22 +243,26 @@ bool LLC::shuffle() {
 	vector<string> dstrings;
 
 	Node * temp;
-	string sTemp;
 	for (temp = first; temp != nullptr; temp = temp->next) {
 		dstrings.push_back(temp->data);
 	}
 
+	// for testing, see contents of dstrings
+	// for (string x : dstrings) cout << x << endl;
+
 	int numChanges = rand() % 10, indexA, indexB;
+	string sTemp;
 
 	for (int i = 0; i < numChanges; i++) {
 
+		// set random indexes at which to swap strings
 		indexA = rand() % dstrings.size();
 		indexB = rand() % dstrings.size();
 
 		// swap the strings at indexA and indexB
 		sTemp = dstrings[indexA];
 		dstrings[indexA] = dstrings[indexB];
-		dstrings[indexB] = dstrings[indexA];
+		dstrings[indexB] = sTemp;
 
 	}
 
@@ -246,13 +279,29 @@ bool LLC::shuffle() {
 LLC operator+(const LLC & aList, const LLC & bList) {
 
 	// start newlist off as a copy of the aList
-	LLC newlist(aList);
+	LLC newlist;
+	Node * temp, * newNode;
 
-	// Now we only have to add the contents of bList to newlist
-	Node * temp;
-	for (temp = aList.first; temp != nullptr; temp = temp->next) {
-		newlist.insert(temp->data);
-	}
+	temp = aList.first;
+	newNode = new Node(temp->data);
+	newlist.first = newNode;
+	newlist.last = newNode;
+
+	for (temp = aList.first->next; temp != nullptr; temp = temp->next) {
+
+		newNode = new Node(temp->data);
+		newlist.last->next = newNode;
+		newlist.last = newlist.last->next;
+
+	}	
+
+	for (temp = bList.first; temp != nullptr; temp = temp->next) {
+
+		newNode = new Node(temp->data);
+		newlist.last->next = newNode;
+		newlist.last = newlist.last->next;
+
+	}	
 
 	return newlist;
 
@@ -271,7 +320,7 @@ void LLC::head(int n) {
 		temp = temp->next;
 	}
 
-	result += temp->next->next->data;
+	result += temp->data;
 
 	cout << "[" << result << "]" << endl;
 
@@ -284,7 +333,8 @@ string LLC::tail() {
 		return last->data;
 	}
 
-	cout << "last pointer does not exist (nullptr)" << endl;
+	cout << "[NO STRING RETURNED]" << endl;
+	return "[NO STRING RETURNED]";
 
 }
 
@@ -343,6 +393,18 @@ int LLC::len() {
 }
 
 void LLC::join(LLC other) {
+	// cout << "DID THE BEAT DROP? LOL" << endl; // for testing
+
+	// Node * temp, * newNode;
+	// temp = other.first;
+	// 
+	// for (temp = other.first; temp != nullptr; temp = temp->next) {
+
+	// 	newNode = new Node(temp->data);
+	// 	last->next = newNode;
+	// 	last = last->next;
+
+	// }
 
 	last->next = other.first;
 	last = other.last;

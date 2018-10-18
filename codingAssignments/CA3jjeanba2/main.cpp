@@ -18,6 +18,8 @@ int main() {
 	 cout << "test3: " << test3 << endl;
 
 	// test the destructor later
+	// make an LLC obj in another function and 
+	// see how it destructs.
 
 	if (test1.contains("Michael")) cout << "Michael Scott in the house!" << endl;
 	if (!test1.contains("Jim")) cout << "Jimothy has not yet arrived" << endl;
@@ -29,21 +31,27 @@ int main() {
 	cout << "test3: " << test3 << endl;
 
 	test3.shuffle();
-	cout << "test3: " << test3 << endl;
+	cout << "test3: " << test3 << " (shuffled) " << endl;
 
 	LLC test4, test5;
 	test4.insert("Andy");
 	test4.insert("Erin");
+	cout << "test4: " << test4 << endl;
 	
 	test5.insert("Kelly");
 	test5.insert("Ryan");
-
-	LLC test6 = test4 + test5;
-	cout << "test4: " << test4 << endl;
 	cout << "test5: " << test5 << endl;
-	cout << "test6: " << test6 << endl;
+
+	LLC test6;
+	test6 = test4 + test5; 
+	cout << "test6: " << test6 << " = test4 + test5 " << endl;
 
 	test1.head(2);
+
+	test1.tail();
+	test4.tail();
+	test6.tail();
+	cout << "did the beat drop?" << endl;
 
 	LLC test7;
 	test7.insert("one");
@@ -56,16 +64,19 @@ int main() {
 
 	cout << "test7 is length " << test7.len() << endl;
 
-	LLC test8;
-	test8.insert("Jim"); test8.insert("Pam");
-	LLC test9;
-	test9.insert("Nelly"); test9.insert("Toby");
+	// LLC test8;
+	// test8.insert("Jim"); test8.insert("Pam");
+	// LLC test9;
+	// test9.insert("Nelly"); test9.insert("Toby");
 
-	cout << "Okay, I guess you can just stop here" << endl;
+	// cout << "Okay, I guess you can just stop here" << endl; // for testing
 
-	test8.join(test9);
-	cout << "test8: " << test8 << endl;
+	// cout << "test8: " << test8 << endl;
+	// cout << "test9: " << test9 << endl;
+
+	// test8.join(test9);
+	// cout << "test8: " << test8 << " test8.join(test9)" << endl;
 
 	return 0;
 
-}
+}  
