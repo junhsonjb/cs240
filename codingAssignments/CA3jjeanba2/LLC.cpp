@@ -17,20 +17,31 @@ LLC::LLC() {
 // of param in the new LLC being created
 LLC::LLC(const LLC & source) {
 
+	first = nullptr;
+	last = nullptr;
+
+    // cout << "Copy constructor" << endl << std::flush;
+    // cout << source << endl; 
+
 	Node * temp;
 	for (temp = source.first; temp != nullptr; temp = temp->next)
 	{
-
+        // cout << "CC inserting " << temp->data << endl << std::flush;
 		// insert a new node with the data from the
 		// current source node
 		insert(temp->data);	// insert function handles setting first and last
-
+        // cout << "CC done inserting " << temp->data << endl << std::flush;
 	}
+
+	// cout << "Hello from copy constructor!" << endl << std::flush;
 
 }
 
 
 LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
+
+	first = nullptr;
+	last = nullptr;
 
 	if (this != & source) {
 
@@ -164,7 +175,15 @@ bool LLC::insert(const string & value) {
 
 	// Node * newNode;
 	// newNode->data = value;
-	Node * newNode = new Node(value);
+    // cout << "A Inside insert "  << value << endl;
+
+	Node * newNode = new (std::nothrow) Node(value);
+    if (newNode == nullptr) {
+       cout << "WHY?" << endl;
+       exit(1);
+    }
+
+    // cout << "B Inside insert "  << value << endl;
 	
 	// if there is no first, make newNode the new first (and last)
 	if (first == nullptr) {
@@ -174,6 +193,7 @@ bool LLC::insert(const string & value) {
 		last->next = newNode;
 		last = newNode;
 	}
+    // cout << "C Inside insert "  << value << endl;
 
 	return true;
 
@@ -340,6 +360,11 @@ string LLC::tail() {
 
 ostream & operator<<(ostream & out, const LLC & source) {
 
+	if (source.first == nullptr) {
+		out << "[ (no content) ]";
+		return out;
+	}
+
 	string result = ""; // string to send to the stream, out
 
 	Node * temp;
@@ -395,19 +420,19 @@ int LLC::len() {
 void LLC::join(LLC other) {
 	// cout << "DID THE BEAT DROP? LOL" << endl; // for testing
 
-	// Node * temp, * newNode;
-	// temp = other.first;
-	// 
-	// for (temp = other.first; temp != nullptr; temp = temp->next) {
+	Node * temp, * newNode;
+	temp = other.first;
+	
+	for (temp = other.first; temp != nullptr; temp = temp->next) {
 
-	// 	newNode = new Node(temp->data);
-	// 	last->next = newNode;
-	// 	last = last->next;
+		newNode = new Node(temp->data);
+		last->next = newNode;
+		last = last->next;
 
-	// }
+	}
 
-	last->next = other.first;
-	last = other.last;
+	// last->next = other.first;
+	// last = other.last;
 
 }
 
