@@ -2,17 +2,11 @@
 
 all: main
 
-pc_main: Node.o LLC.o PlayingCard.o pc_main.o
-	g++ pc_main.o Node.o LLC.o PlayingCard.o
+main: Node.o LLC.o PlayingCard.o main.o
+	g++ main.o Node.o LLC.o PlayingCard.o -o main
 
-node_main: Node.o LLC.o PlayingCard.o node_main.o
-	g++ node_main.o Node.o LLC.o PlayingCard.o -o node_main
-
-node_main.o: node_main.cpp
-	g++ -c node_main.cpp
-
-pc_main.o: pc_main.cpp
-	g++ -c pc_main.cpp
+main.o: main.cpp
+	g++ -c main.cpp
 
 Node.o: Node.cpp
 	g++ -c Node.cpp

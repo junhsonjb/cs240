@@ -8,7 +8,7 @@ class PlayingCard {
 
 	public:
 		PlayingCard();
-		PlayingCard(char pc_value, char pc_suit);
+		PlayingCard(string pc_value, string pc_suit);
 		friend ostream & operator<<(ostream & out, const PlayingCard & pc);
 		bool operator<(const PlayingCard & other);
 		bool operator>(const PlayingCard & other);
