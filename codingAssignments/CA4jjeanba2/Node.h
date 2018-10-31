@@ -5,14 +5,20 @@
 
 using namespace std;
 
+template<typename type>
 class Node {
 
 	public:
 		// Data members
-		string data = "[EMPTY STRING]";
-		Node * next = nullptr; // initially a null pointer
+		type data; // since this is a template, should I initialize as null?
+		Node<type> * next = nullptr; // initially a null pointer
 
 		// Member functions
-		Node(string newdata);
+		Node();
+		Node(type newdata);
 
 };
+
+// have to include this here since
+// separation is not allowed
+#include "Node.cpp"

@@ -1,8 +1,9 @@
 #include <time.h>
-#include "LLC.h"
+//#include "LLC.h"
 
 // Constructor creates an empty list
-LLC::LLC() {
+template <typename type>
+LLC<type>::LLC() {
 
 	// an empty list is one that has
 	// a null first pointer
@@ -15,7 +16,8 @@ LLC::LLC() {
 
 // Copy Constructor stores a deep copy
 // of param in the new LLC being created
-LLC::LLC(const LLC & source) {
+template <typename type>
+LLC<type>::LLC(const LLC & source) {
 
 	first = nullptr;
 	last = nullptr;
@@ -23,7 +25,7 @@ LLC::LLC(const LLC & source) {
     // cout << "Copy constructor" << endl << std::flush;
     // cout << source << endl; 
 
-	Node * temp;
+	Node<type> * temp;
 	for (temp = source.first; temp != nullptr; temp = temp->next)
 	{
         // cout << "CC inserting " << temp->data << endl << std::flush;
@@ -37,8 +39,8 @@ LLC::LLC(const LLC & source) {
 
 }
 
-
-LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
+template <typename type>
+LLC<type> & LLC<type>::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 
 	first = nullptr;
 	last = nullptr;
@@ -47,7 +49,7 @@ LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 
 		// must first delete all data currently in this LLC
 
-		Node * curr, * prev;
+		Node<type> * curr, * prev;
 		
 		curr = first;
 		prev = nullptr;
@@ -70,10 +72,10 @@ LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 		if (source.first == nullptr)
 			return * this;
 
-		Node * newNode, * temp;
+		Node<type> * newNode, * temp;
 		temp = source.first;
 
-		newNode = new Node(temp->data);
+		newNode = new Node<type>(temp->data);
 		first = newNode;
 		last = newNode;
 		
@@ -82,7 +84,7 @@ LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 
 		for (temp = temp->next; temp != nullptr; temp = temp->next) {
 
-			newNode = new Node(temp->data);
+			newNode = new Node<type>(temp->data);
 			last->next = newNode;
 			last = last->next;
 
@@ -109,11 +111,12 @@ LLC & LLC::operator=(const LLC & source) { // return LLC or & LLC (referece)?
 //}
 
 // Destructor
-LLC::~LLC() {
+template <typename type>
+LLC<type>::~LLC() {
 
-	Node * temp;
-	Node * prev = nullptr;
-	Node * del;
+	Node<type> * temp;
+	Node<type> * prev = nullptr;
+	Node<type> * del;
 
 	temp = first;
 	while (temp != nullptr) {
@@ -140,14 +143,15 @@ LLC::~LLC() {
 
 }
 
-bool LLC::contains(const string & value) {
+template <typename type>
+bool LLC<type>::contains(const type & value) {
 
 	// check if this LLC contains a given string, value
 	
 	// travese LLC and check if value is present in
 	// each node
 
-	Node * temp;
+	Node<type> * temp;
 	for (temp = first; temp != nullptr; temp = temp->next) {
 
 		if (temp->data == value)
@@ -162,8 +166,8 @@ bool LLC::contains(const string & value) {
 
 }
 
-
-bool LLC::insert(const string & value) {
+template <typename type>
+bool LLC<type>::insert(const type & value) {
 
 	// set the next property of the last
 	// Node to a new node containing value
@@ -177,7 +181,7 @@ bool LLC::insert(const string & value) {
 	// newNode->data = value;
     // cout << "A Inside insert "  << value << endl;
 
-	Node * newNode = new (std::nothrow) Node(value);
+	Node<type> * newNode = new (std::nothrow) Node<type>(value);
     if (newNode == nullptr) {
        cout << "WHY?" << endl;
        exit(1);
@@ -199,7 +203,8 @@ bool LLC::insert(const string & value) {
 
 }
 
-bool LLC::remove(const string & value) {
+template<typename type>
+bool LLC<type>::remove(const type & value) {
 
 	// Don't forget to use the delete
 	// keyword to free the allocated space
@@ -208,9 +213,9 @@ bool LLC::remove(const string & value) {
 	// matches value)
 
 	// must traverse the LLC
-	Node * curr;
-	Node * prev;
-	Node * nodeToDelete;
+	Node<type> * curr;
+	Node<type> * prev;
+	Node<type> * nodeToDelete;
 
 	// HOW TO DELETE THE REMOVED ("UNLINKED") NODE
 	// create a node pointer to point to the link
@@ -252,17 +257,18 @@ bool LLC::remove(const string & value) {
 		prev = curr;
 
 	}
-
+    return true;
 }
 
-bool LLC::shuffle() {
+template <typename type>
+bool LLC<type>::shuffle() {
 
 	// Need a seed to create random numbers
 	srand(time(nullptr));
 
-	vector<string> dstrings;
+	vector<type> dstrings;
 
-	Node * temp;
+	Node<type> * temp;
 	for (temp = first; temp != nullptr; temp = temp->next) {
 		dstrings.push_back(temp->data);
 	}
@@ -271,7 +277,7 @@ bool LLC::shuffle() {
 	// for (string x : dstrings) cout << x << endl;
 
 	int numChanges = rand() % 10, indexA, indexB;
-	string sTemp;
+	type sTemp;
 
 	for (int i = 0; i < numChanges; i++) {
 
@@ -293,23 +299,24 @@ bool LLC::shuffle() {
 		temp->data = dstrings[dstrings.size() - 1];
 		dstrings.pop_back(); // remove the last string to avoid repeating unnecessarily
 	}
-
+    return true;
 }
 
-LLC operator+(const LLC & aList, const LLC & bList) {
+template <typename type>
+LLC<type> operator+(const LLC<type> & aList, const LLC<type> & bList) {
 
 	// start newlist off as a copy of the aList
-	LLC newlist;
-	Node * temp, * newNode;
+	LLC<type> newlist;
+	Node<type> * temp, * newNode;
 
 	temp = aList.first;
-	newNode = new Node(temp->data);
+	newNode = new Node<type>(temp->data);
 	newlist.first = newNode;
 	newlist.last = newNode;
 
 	for (temp = aList.first->next; temp != nullptr; temp = temp->next) {
 
-		newNode = new Node(temp->data);
+		newNode = new Node<type>(temp->data);
 		newlist.last->next = newNode;
 		newlist.last = newlist.last->next;
 
@@ -317,7 +324,7 @@ LLC operator+(const LLC & aList, const LLC & bList) {
 
 	for (temp = bList.first; temp != nullptr; temp = temp->next) {
 
-		newNode = new Node(temp->data);
+		newNode = new Node<type>(temp->data);
 		newlist.last->next = newNode;
 		newlist.last = newlist.last->next;
 
@@ -327,10 +334,11 @@ LLC operator+(const LLC & aList, const LLC & bList) {
 
 }
 
-void LLC::head(int n) {
+template <typename type>
+void LLC<type>::head(int n) {
 
 	string result = "";
-	Node * temp = first;
+	Node<type> * temp = first;
 	
 	// check that n is not more than the amt of nodes in the list
 	if (n > len()) n = len(); // set it to len() if it is (avoid going out of bounds)
@@ -346,43 +354,55 @@ void LLC::head(int n) {
 
 }
 
-string LLC::tail() {
+template <typename type>
+type LLC<type>::tail() {
 
 	if (last != nullptr) {
 		cout << last->data << endl;
 		return last->data;
 	}
 
-	cout << "[NO STRING RETURNED]" << endl;
-	return "[NO STRING RETURNED]";
+	cout << "[NO <type> RETURNED]" << endl;
+
+	type nullret;
+	return nullret;
 
 }
 
-ostream & operator<<(ostream & out, const LLC & source) {
+template <typename type> // do I need the template signature here?
+ostream & operator<< (ostream & out, const LLC<type> & source) {
 
 	if (source.first == nullptr) {
 		out << "[ (no content) ]";
 		return out;
 	}
 
-	string result = ""; // string to send to the stream, out
+	//string result = ""; // string to send to the stream, out
 
-	Node * temp;
+	out << "[";
+
+	Node<type> * temp;
 	for (temp = source.first; temp->next != nullptr; temp = temp->next) {
-		result += temp->data + ", ";
+		// result += temp->data + ", ";
+
+		out << temp->data << ", ";
+
 	}
 
-	result += temp->data;
+	// result += temp->data;
+	out << temp->data;
+	out << "]";
 
-	out << "[" << result << "]";
+	// out << "[" << result << "]";
 
 	return out;
 
 }
 
-void LLC::operator+=(int n) {
+template <typename type>
+void LLC<type>::operator+=(int n) {
 
-	Node * temp;
+	Node<type> * temp;
 
 	// We need to shift the first node into the last spot
 	// and we need to do this shift n time.
@@ -404,10 +424,11 @@ void LLC::operator+=(int n) {
 
 }
 
-int LLC::len() {
+template <typename type>
+int LLC<type>::len() {
 
 	int count = 0;
-	Node * temp;
+	Node<type> * temp;
 
 	for (temp = first; temp != nullptr; temp = temp->next) {
 		count += 1;
@@ -417,15 +438,16 @@ int LLC::len() {
 
 }
 
-void LLC::join(LLC other) {
+template <typename type>
+void LLC<type>::join(LLC other) {
 	// cout << "DID THE BEAT DROP? LOL" << endl; // for testing
 
-	Node * temp, * newNode;
+	Node<type> * temp, * newNode;
 	temp = other.first;
 	
 	for (temp = other.first; temp != nullptr; temp = temp->next) {
 
-		newNode = new Node(temp->data);
+		newNode = new Node<type>(temp->data);
 		last->next = newNode;
 		last = last->next;
 
@@ -435,9 +457,6 @@ void LLC::join(LLC other) {
 	// last = other.last;
 
 }
-
-
-
 
 
 

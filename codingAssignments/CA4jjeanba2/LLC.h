@@ -1,34 +1,55 @@
-#include <stdio.h>
-#include <iostream>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <iostream>
+//#include <stdlib.h>
 #include <vector>
 #include "Node.h"
 
 using namespace std;
 
+template <typename type>
 class LLC {
 
 	public:
 
+		// Node Class
+		// template <typename ntype>
+		// class Node {
+
+		// 	Node();
+		// 	Node(); // make this a value constructor
+
+		// 	ntype = NULL;
+		// 	Node
+
+		// };
+
 		// Data members
-		Node * first; // pointer to first Node
-		Node * last; // pointer to last Node
+		Node<type> * first; // pointer to first Node
+		Node<type> * last; // pointer to last Node
 
 		// Member functions (and one friend!)
 		LLC(); // constructor - creates an empty list
 		LLC(const LLC & source); // copy constructor
 		LLC & operator=(const LLC & source); // assignment operator
 		~LLC(); // destructor
-		bool contains(const string & value);
-		bool insert(const string & value);
-		bool remove(const string & value); // check return value with teacher
+		bool contains(const type & value);
+		bool insert(const type & value);
+		bool remove(const type & value); // check return value with teacher
 		bool shuffle(); // check return value with teacher
-		friend LLC operator+(const LLC & aList, const LLC & bList);
 		void head(int n);
-		string tail();
-		friend ostream & operator<<(ostream & out, const LLC & source);
+		type tail();
 		void operator+=(int n);
 		int len();
 		void join(LLC other);
 
+		template <typename theType>
+		friend LLC<theType> operator+(const LLC<theType> & aList, const LLC<theType> & bList);
+		template <typename theType>
+		friend ostream & operator<< (ostream & out, const LLC<theType> & source);
 };
+
+// have to include this here because templates
+// don't allow separate compilation
+
+#include "LLC.cpp"
+
