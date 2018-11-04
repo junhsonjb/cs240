@@ -369,6 +369,44 @@ type LLC<type>::tail() {
 
 }
 
+template <typename type>
+type LLC<type>::back() {
+
+	// assume that the rest of the code
+	// ensures that the last pointer
+	// will never be nullptr
+	return last->data;
+
+}
+
+template <typename type>
+void LLC<type>::removeBack() {
+
+	if (len() == 1 || len() == 0) {
+
+		first = nullptr;
+		last = nullptr;
+
+		return;
+
+	}
+
+	Node<type> * curr;
+	Node<type> * prev;
+	Node<type> * nodeToDelete;
+	for (curr = first; curr->next != nullptr; curr = curr->next) {
+
+		prev = curr;
+
+	}
+
+	nodeToDelete = curr;
+	delete(nodeToDelete);
+	last = prev;
+	last->next = nullptr;
+
+}
+
 template <typename type> // do I need the template signature here?
 ostream & operator<< (ostream & out, const LLC<type> & source) {
 

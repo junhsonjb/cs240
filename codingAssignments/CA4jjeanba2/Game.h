@@ -10,6 +10,7 @@ class Game {
 
 		/* Member functions */
 		Game(); // default constructor, populate the entire deck of cards
+		void addPlayers(Player p1, Player p2); // assign Players
 		Player play(); // play an entire game of war between the 2 players
 		void battle(); // one REGULAR round (unequal cards b/t players)
 		void war(); // both players put same card value (10 cards used -- maybe use battle() in this function!)

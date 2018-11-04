@@ -26,6 +26,13 @@ Game::Game() {
 
 }
 
+void Game::addPlayers(Player p1, Player p2) {
+
+	player1 = p1;
+	player2 = p2;
+
+}
+
 void Game::shuffleDeck() {
 
 	// literally all we have to do is
@@ -40,50 +47,65 @@ void Game::dealCards() {
 
 	// disperse all of the PlayingCards between the players
 	PlayingCard temp;
-	for (int i = 0; i < cardDeck.len(); i++) {
+	cout << "Card Deck Length: " << cardDeck.len() << endl;
 
-		// store the card
-		temp = cardDeck.tail();
+	int count = 0;
+	while (cardDeck.len() != 0) {
 
-		// if i is even give temp to p1 otherwise give it to p2
-		// this way each player has half the deck
-		if (i % 2 == 0) {
-			
-			player1.addCard(temp); // add the card to player1's hand
-			cardDeck.remove(temp); // remove the card from cardDeck
+		temp = cardDeck.back();
+
+		if (count % 2 == 0) {
+
+			player1.addCard(temp);
 
 		} else {
 
-			player2.addCard(temp); // add the card to player2's hand
-			cardDeck.remove(temp); // remove the card from cardDeck
+			player2.addCard(temp);
 
 		}
 
+		cardDeck.removeBack();
+		count += 1;
 
 	}
+
 
 }
 
 Player Game::play() {
 
 	PlayingCard temp1, temp2;
+	int battleCount = 0;
+	int warCount = 0;
+	Player roundWinner;
 
 	// do this while neither player has won (has all 52 cards)
 	while (player1.hand.len() != 52 && player2.hand.len() != 52) {
 
-		temp1 = player1.hand.tail();
-		player1.hand.remove(temp1);
+		// if someone wins during the game, take care of it
+		if (player1.hand.len() == 52) {
+			return player1;
+		}
 
-		temp2 = player2.hand.tail();
-		player2.hand.remove(temp2);
+		if (player2.hand.len() == 52) {
+			return player2;
+		}
+	
+		temp1 = player1.hand.back();
+		player1.hand.removeBack();
+
+		temp2 = player2.hand.back();
+		player2.hand.removeBack();
 
 		cardDeck.insert(temp1);
 		cardDeck.insert(temp2);
 
-		if (temp1 != temp2)
+		if (temp1 != temp2) {
 			battle(); // changes # of cards in deck and player hands
-		else
+		}
+		else {
 			war(); // changes # of cards in deck and player hands
+		}
 
 	}
 
@@ -91,9 +113,9 @@ Player Game::play() {
 	// then one of the Players has all of the cards.
 	// This player is the winner, return them
 
-	if (player1.hand.len() == 52)
+	if (player1.hand.len() == 52) {
 		return player1;
-
+	}
 	return player2;
 
 }
@@ -102,11 +124,11 @@ void Game::battle() {
 
 	PlayingCard p2, p1;
 
-	p2 = cardDeck.tail();
-	cardDeck.remove(p2);
+	p2 = cardDeck.back();
+	cardDeck.removeBack();
 
-	p1 = cardDeck.tail();
-	cardDeck.remove(p1);
+	p1 = cardDeck.back();
+	cardDeck.removeBack();
 
 	// if p2 wins this round
 	if (p2 > p1) {
@@ -130,28 +152,55 @@ void Game::battle() {
 
 void Game::war() {
 
+	// check if any player has less than 4 cards,
+	// if one of them does, then the other one wins
+
+	if (player1.hand.len() < 4) {
+		//player1 loses, player2 wins
+		player2.hand = player2.hand + player1.hand;
+
+		while (player1.hand.len() != 0) {
+			player1.hand.removeBack();
+		}
+
+		return;
+
+	}
+
+	if (player2.hand.len() < 4) {
+		//player2 loses, player1 wins
+		player1.hand = player1.hand + player2.hand;
+
+		while (player2.hand.len() != 0) {
+			player2.hand.removeBack();
+		}
+
+		return;
+
+	}
+
 	PlayingCard p1, p2, temp1, temp2;
 
 	for (int i = 0; i < 3; i++) {
-		p1 = player1.hand.tail();
+		p1 = player1.hand.back();
 		cardDeck.insert(p1);
-		player1.hand.remove(p1);
+		player1.hand.removeBack();
 	}
 
-	temp1 = player1.hand.tail();
+
+	temp1 = player1.hand.back();
 	cardDeck.insert(temp1);
-	player1.hand.remove(temp1);
+	player1.hand.removeBack();
 
 	for (int i = 0; i < 3; i++) {
-		p2 = player1.hand.tail();
+		p2 = player2.hand.back();
 		cardDeck.insert(p2);
-		player2.hand.remove(p2);
+		player2.hand.removeBack();
 	}
 
-	temp2 = player2.hand.tail();
+	temp2 = player2.hand.back();
 	cardDeck.insert(temp2);
-	player2.hand.remove(temp2);
-
+	player2.hand.removeBack();
 
 	// Now to compare the temp cards and pick a round winner
 
@@ -159,18 +208,18 @@ void Game::war() {
 
 		// player1 gets all the cards in the deck
 		while (cardDeck.len() != 0) {
-			p1 = cardDeck.tail();
+			p1 = cardDeck.back();
 			player1.hand.insert(p1);
-			cardDeck.remove(p1);
+			cardDeck.removeBack();
 		}
 		
 	} else if (temp2 > temp1) {
 
 		// player2 gets all the cards in the deck
 		while (cardDeck.len() != 0) {
-			p2 = cardDeck.tail();
+			p2 = cardDeck.back();
 			player2.hand.insert(p2);
-			cardDeck.remove(p2);
+			cardDeck.removeBack();
 		}
 
 	}
