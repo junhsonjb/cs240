@@ -47,7 +47,7 @@ void Game::dealCards() {
 
 	// disperse all of the PlayingCards between the players
 	PlayingCard temp;
-	cout << "Card Deck Length: " << cardDeck.len() << endl;
+	// cout << "Card Deck Length: " << cardDeck.len() << endl;
 
 	int count = 0;
 	while (cardDeck.len() != 0) {
@@ -74,152 +74,148 @@ void Game::dealCards() {
 
 Player Game::play() {
 
-	PlayingCard temp1, temp2;
-	int battleCount = 0;
-	int warCount = 0;
-	Player roundWinner;
+	if (player1.hand.len() + player2.hand.len() != 52) {
+		cout << "Card Number error" << endl;
+		exit(1);
+	}	
 
-	// do this while neither player has won (has all 52 cards)
+	// reset battleScore and warScore for p1 and p2
+	// gotta put those variables into the Player Class
+
+	// while neither player has won (gained all 52 cards)
 	while (player1.hand.len() != 52 && player2.hand.len() != 52) {
 
-		// if someone wins during the game, take care of it
-		if (player1.hand.len() == 52) {
-			return player1;
+		// make sure there's still 52 cards total
+		cout << "current total cards: " << player1.hand.len() + player2.hand.len() << endl;
+
+		// make sure we're not moving "cards" from any empty decks
+		if (player1.hand.len() != 0 && player2.hand.len() != 0) {
+
+			// compare cards ONLY TO SEE IF EQUAL OR NOT
+			if (player1.hand.back() == player2.hand.back()) {
+				cout << "calling war()" << endl;
+				war(); // call war() if they are equal
+			} else {
+				cout << "actually calling battle()" << endl;
+				battle(); // call battle if they're not equal
+			}
+
 		}
 
-		if (player2.hand.len() == 52) {
-			return player2;
-		}
-	
-		temp1 = player1.hand.back();
-		player1.hand.removeBack();
-
-		temp2 = player2.hand.back();
-		player2.hand.removeBack();
-
-		cardDeck.insert(temp1);
-		cardDeck.insert(temp2);
-
-		if (temp1 != temp2) {
-			battle(); // changes # of cards in deck and player hands
-		}
-		else {
-			war(); // changes # of cards in deck and player hands
-		}
+		cout << "Player1 has " << player1.hand.len() << " cards" << endl;
+		cout << "Player2 has " << player2.hand.len() << " cards" << endl;
+		cout << "Card Deck has " << cardDeck.len() << " cards" << endl;
+		cout << endl;
 
 	}
 
-	// Once we've left this loop,
-	// then one of the Players has all of the cards.
-	// This player is the winner, return them
+	// after the loop is over, one player has won
+	// find that player and update their gameScore
+	// then return them
+
+	cout << "AYYYYYYYYYYYYYY" << endl;
 
 	if (player1.hand.len() == 52) {
+		player1.gameScore += 1;
 		return player1;
 	}
+
+	player2.gameScore += 1;
 	return player2;
 
 }
 
 void Game::battle() {
 
-	PlayingCard p2, p1;
+	PlayingCard temp1, temp2;
+	temp1 = player1.hand.removeBack();
+	temp2 = player2.hand.removeBack();
 
-	p2 = cardDeck.back();
-	cardDeck.removeBack();
+	cardDeck.insert(temp1);
+	cardDeck.insert(temp2);
 
-	p1 = cardDeck.back();
-	cardDeck.removeBack();
-
-	// if p2 wins this round
-	if (p2 > p1) {
-		// move all cards into player2's hand
-		player2.hand.insert(p1);
-		player2.hand.insert(p2);
-	} else {
-		// move all cards into player1's hand
-		player1.hand.insert(p1);
-		player1.hand.insert(p2);
+	// player1 wins the battle
+	if (temp1 > temp2) {
+		while (cardDeck.len() != 0) {
+			player1.addCard( cardDeck.removeBack() );
+		}
+		player1.battleScore += 1;
 	}
 
-	/*
-	   war() will take care of the case when p2 == p1
-	   and the play() function will make sure that 
-	   if p2 does equal p1, then this function won't
-	   be called, war() will be called
-	*/
+	// player2 wins the battle
+	if (temp1 < temp2) {
+		while (cardDeck.len() != 0) {
+			player2.addCard( cardDeck.removeBack() );
+		}
+		player2.battleScore += 1;
+	}
 
 }
 
 void Game::war() {
 
-	// check if any player has less than 4 cards,
-	// if one of them does, then the other one wins
+	cout << "WILL YOU SEGFAULT?" << endl;
 
-	if (player1.hand.len() < 4) {
-		//player1 loses, player2 wins
-		player2.hand = player2.hand + player1.hand;
-
+	// before anything, make sure players have enough cards
+	if (player1.hand.len() < 5) {
+		// empty all cards into player2's hand
 		while (player1.hand.len() != 0) {
-			player1.hand.removeBack();
+			player2.addCard( player1.hand.removeBack() );
 		}
-
-		return;
-
+		exit(0);
 	}
 
-	if (player2.hand.len() < 4) {
-		//player2 loses, player1 wins
-		player1.hand = player1.hand + player2.hand;
+	cout << "I WILL NOT SEGFAULT!" << endl;
 
+	if (player2.hand.len() < 5) {
+		// empty all cards into player1's hand
 		while (player2.hand.len() != 0) {
-			player2.hand.removeBack();
+			player1.addCard( player2.hand.removeBack() );
 		}
-
-		return;
-
+		exit(0);
 	}
 
-	PlayingCard p1, p2, temp1, temp2;
+	// move one card each from p1 and p2 (these are equal) to cardDeck
+	cardDeck.insert( player1.hand.removeBack() );
+	cardDeck.insert( player2.hand.removeBack() );
 
+	// move three more cards from p1 and p2 to cardDeck
 	for (int i = 0; i < 3; i++) {
-		p1 = player1.hand.back();
-		cardDeck.insert(p1);
-		player1.hand.removeBack();
+		cardDeck.insert( player1.hand.removeBack() );
+		cardDeck.insert( player2.hand.removeBack() );
 	}
 
+	// get the final cards (comparison cards) from each player
+	PlayingCard temp1, temp2;
+	temp1 = player1.hand.removeBack();
+	temp2 = player2.hand.removeBack();
 
-	temp1 = player1.hand.back();
-	cardDeck.insert(temp1);
-	player1.hand.removeBack();
+	if (temp1 == temp2) {
+		/* come up with a way to handle this */
+		/* this way should end with this if clause */
 
-	for (int i = 0; i < 3; i++) {
-		p2 = player2.hand.back();
-		cardDeck.insert(p2);
-		player2.hand.removeBack();
-	}
-
-	temp2 = player2.hand.back();
-	cardDeck.insert(temp2);
-	player2.hand.removeBack();
-
-	// Now to compare the temp cards and pick a round winner
-
-	if (temp1 > temp2) {
-
-		// player1 gets all the cards in the deck
+		// at least for now, just make player1 win in this case
 		while (cardDeck.len() != 0) {
-			p1 = cardDeck.back();
-			player1.hand.insert(p1);
-			cardDeck.removeBack();
+			player1.addCard( cardDeck.removeBack() );
 		}
+
+	}
+
+	else if (temp1 > temp2) {
+
+		player1.warScore += 1;
+
+		/* move all cards from cardDeck back into p1'a hand */
+		while (cardDeck.len() != 0) {
+			player1.addCard( cardDeck.removeBack() );
+		}
+
+	} else {
 		
-	} else if (temp2 > temp1) {
+		player2.warScore += 1;
 
-		// player2 gets all the cards in the deck
 		while (cardDeck.len() != 0) {
-			p2 = cardDeck.back();
-			player2.hand.insert(p2);
-			cardDeck.removeBack();
+			player2.addCard( cardDeck.removeBack() );
 		}
 
 	}

@@ -42,7 +42,7 @@ class LLC {
 		int len();
 		void join(LLC other);
 		type back();
-		void removeBack();
+		type removeBack();
 
 		template <typename theType>
 		friend LLC<theType> operator+(const LLC<theType> & aList, const LLC<theType> & bList);

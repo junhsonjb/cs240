@@ -380,20 +380,22 @@ type LLC<type>::back() {
 }
 
 template <typename type>
-void LLC<type>::removeBack() {
+type LLC<type>::removeBack() {
 
 	if (len() == 1 || len() == 0) {
 
 		first = nullptr;
 		last = nullptr;
 
-		return;
+		type nullret;
+		return nullret;
 
 	}
 
 	Node<type> * curr;
 	Node<type> * prev;
 	Node<type> * nodeToDelete;
+	type returnVal;
 	for (curr = first; curr->next != nullptr; curr = curr->next) {
 
 		prev = curr;
@@ -401,9 +403,11 @@ void LLC<type>::removeBack() {
 	}
 
 	nodeToDelete = curr;
-	delete(nodeToDelete);
 	last = prev;
 	last->next = nullptr;
+	returnVal = nodeToDelete->data;
+	delete(nodeToDelete);
+	return returnVal;
 
 }
 

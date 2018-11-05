@@ -6,30 +6,15 @@ using namespace std;
 
 int main() {
 
-	vector<Player> players;
+	Player p1("Junhson"), p2("Lindell");
+	Game game;
+	game.addPlayers(p1, p2);
+	game.dealCards();
 
-}
+	cout << "it's not an infinite loop..." << endl;
 
-Player tournament(vector<Player> opps) {
-
-	if (opps.size() == 2) {
-		Game game;
-		game.addPlayer(opps[0].name);
-		game.addPlayer(opps[1].name);
-		game.shuffleDeck;
-		game.dealCards;
-		return game.play();
-	}
-
-	vector<Player> others;
-	for (int i = 0; i < opps.size() / 2; i++) {
-	
-		others.push_back(opps.end() - 1);
-		opps.pop_back();
-
-	}
-
-	tournament(opps);
-	tournament(others);
+	// time to play the game
+	Player winner = game.play();
+	cout<< "And the winner is ... " << winner.name << endl;
 
 }

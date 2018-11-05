@@ -8,6 +8,9 @@ class Player {
 		/* Data Members */
 		string name; // player's name, just first name should be ok
 		LLC<PlayingCard> hand; // the players hand of cards	
+		int warScore = 0; // number of wars won (per game)
+		int battleScore = 0; // number of battles won (per game)
+		int gameScore = 0; // number of games won
 
 		/* Member functions */
 		Player(); // default contstructor
