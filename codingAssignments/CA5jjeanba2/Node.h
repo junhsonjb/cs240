@@ -1,17 +1,14 @@
-#ifndef H_Node_H
-#define H_Node_H
-
-#include "Edge.h"
+//class Edge;
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
+//#include "Node.h"
+//#include "Time.h"
 
-#endif
+#include "Edge.h"
 
-using namespace std;
-
-class Node {
+class Node{
 
 	public:
 
@@ -20,7 +17,7 @@ class Node {
 		string cityName;
 		vector<Edge> adjacents;
 
-		void addEdge(Edge edgeToAdd);
-		bool hasEdge(Edge edge);
+		void addEdge(Edge * edgeToAdd);
+		bool hasEdge(Edge * edge);
 
 };

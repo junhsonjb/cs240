@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <list>
+#include <set>
 #include "Node.h"
 
 using namespace std;
@@ -23,7 +24,7 @@ int main() {
 	int buffersize;
 	string city1, city2, time1, time2, price;
 	set<string> cityNames;
-	list<Node> flightGraph;
+	list<Node> flightGraph; // should be a vector
 
 	// go thru each line and process the information
 	while ( getline(ddfs, buffer) ) {

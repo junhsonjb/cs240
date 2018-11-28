@@ -7,16 +7,16 @@ Node::Node(string city) {
 
 }
 
-void Node::addEdge(Edge edgeToAdd) {
+void Node::addEdge(Edge * edgeToAdd) {
 
-	adjacents.insert(edge);
+	adjacents.push_back(*edgeToAdd);
 
 }
 
-bool Node::hasEdge(Edge edge) {
+bool Node::hasEdge(Edge * edge) {
 
 	// if find() returns the edge we're looking for, return true
-	if ( find(adjacents.begin(), adjacents.end(), edge) != adjacents.end() ) {
+	if ( find(adjacents.begin(), adjacents.end(), *edge) != adjacents.end() ) {
 		return true;
 	}
 

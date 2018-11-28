@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 
 using namespace std;
 
@@ -12,6 +9,7 @@ class Time {
 		int minutes;
 		string meridiem; // must equal "am" or "pm"
 
+		Time();
 		Time(string time);
 		Time(int hrs, int mins, string mer);
 		bool operator>(Time other);

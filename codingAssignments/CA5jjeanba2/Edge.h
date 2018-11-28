@@ -1,7 +1,3 @@
-#ifndef H_Node_H
-#define H_Node_H
-
-#include "Edge.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -9,8 +5,9 @@
 #include "Node.h"
 #include "Time.h"
 
-#endif
+using namespace std;
 
+class Node;
 
 class Edge {
 

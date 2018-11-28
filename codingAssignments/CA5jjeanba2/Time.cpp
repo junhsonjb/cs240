@@ -1,5 +1,11 @@
 #include "Time.h"
 
+Time::Time() {
+
+	hours = 0;
+	minutes = 0;
+}
+
 // constructor taking string of form: HH:MMam or HH:MMpm
 Time::Time(string time) {
 
