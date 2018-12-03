@@ -1,5 +1,12 @@
 #include "Node.h"
+#include "Edge.h"
 #include <algorithm>
+
+Node::Node() {
+
+	cityName = "[NOT DECLARED]";
+
+}
 
 Node::Node(string city) {
 
@@ -7,16 +14,16 @@ Node::Node(string city) {
 
 }
 
-void Node::addEdge(Edge * edgeToAdd) {
+void Node::addEdge(const Edge & edgeToAdd) {
 
-	adjacents.push_back(*edgeToAdd);
+	adjacents.push_back(edgeToAdd);
 
 }
 
-bool Node::hasEdge(Edge * edge) {
+bool Node::hasEdge(const Edge & edge) {
 
 	// if find() returns the edge we're looking for, return true
-	if ( find(adjacents.begin(), adjacents.end(), *edge) != adjacents.end() ) {
+	if ( find(adjacents.begin(), adjacents.end(), edge) != adjacents.end() ) {
 		return true;
 	}
 

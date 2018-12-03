@@ -1,3 +1,11 @@
+#ifndef H_Time_H
+#define H_Time_H
+
+//#include "Edge.h"
+//#include "Node.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
 
 using namespace std;
 
@@ -7,7 +15,7 @@ class Time {
 
 		int hours;
 		int minutes;
-		string meridiem; // must equal "am" or "pm"
+		string meridiem; // must equal "am" or "pm" to be valid
 
 		Time();
 		Time(string time);
@@ -18,3 +26,5 @@ class Time {
 		bool operator!=(Time other);
 
 };
+
+#endif

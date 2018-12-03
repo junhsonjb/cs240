@@ -2,8 +2,8 @@
 
 all: main
 
-main: Node.o Edge.o main.o
-	g++ Node.o Edge.o main.o -o main
+main: Time.o Node.o Edge.o main.o
+	g++ Time.o Node.o Edge.o main.o -o main
 
 main.o: main.cpp
 	g++ -c main.cpp

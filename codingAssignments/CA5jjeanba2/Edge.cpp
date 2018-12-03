@@ -1,11 +1,27 @@
-#include "Edge.h"
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
 
-Edge::Edge(Time dep, Time arr, float cost, Node * to) {
+#include "Time.h"
+#include "Edge.h"
+//#include "Node.h"
+
+using namespace std;
+
+Edge::Edge() {
+
+	// set these so that we know that nothing has been defined
+	price = -1.0;
+	destination = -1;
+
+}
+
+Edge::Edge(Time dep, Time arr, float cost, int destinationNum) {
 
 	departureTime = dep;
 	arrivalTime = arr;
 	price = cost;
-	destination = to;
+	destination = destinationNum;
 
 }
 
@@ -15,7 +31,7 @@ bool Edge::operator==(const Edge & other) {
 	if (departureTime == other.departureTime &&
 		arrivalTime == other.arrivalTime &&
 		price == other.price &&
-		destination->cityName == other.destination->cityName ) {
+		destination == other.destination) {
 
 		return true;
 
