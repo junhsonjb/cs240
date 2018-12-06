@@ -19,9 +19,18 @@ class Node {
 
 		string cityName;
 		vector<Edge> adjacents;
+		/* data members for traversal/shortest path */
+		string color;
+		double distance;
+		int predecessor;
 
 		void addEdge(const Edge & edgeToAdd);
 		bool hasEdge(const Edge & edge);
+
+		bool operator>(Node other);
+		bool operator<(Node other);
+		bool operator==(Node other);
+		bool operator!=(Node other);
 
 };
 #endif

@@ -5,6 +5,10 @@
 Node::Node() {
 
 	cityName = "[NOT DECLARED]";
+	/* set values for traversal/shortest path */
+	color = "white";
+	distance = numeric_limits<double>::infinity();
+	predecessor = -1;
 
 }
 
@@ -29,5 +33,29 @@ bool Node::hasEdge(const Edge & edge) {
 
 	// otherwise return false
 	return false;
+
+}
+
+bool Node::operator>(Node other) {
+
+	return distance > other.distance;
+
+}
+
+bool Node::operator<(Node other) {
+
+	return distance < other.distance;
+
+}
+
+bool Node::operator==(Node other) {
+
+	return distance == other.distance;
+
+}
+
+bool Node::operator!=(Node other) {
+
+	return distance != other.distance;
 
 }
