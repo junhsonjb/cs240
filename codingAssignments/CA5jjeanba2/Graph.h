@@ -23,7 +23,7 @@ class Graph {
 		vector<string> anyFlightPlan(string start, string end);
 		void earliestFlightPlan(string start, string end);
 		void initSingleSource(Node * source);
-		void relax(Node * start, Node * end, Time weight);
+		void relax(Node * start, Node * end, Edge * weight);
 };
 
 #endif

@@ -22,6 +22,7 @@ class Node {
 		/* data members for traversal/shortest path */
 		string color;
 		double distance;
+		Time dTime;
 		int predecessor;
 
 		void addEdge(const Edge & edgeToAdd);

@@ -163,13 +163,17 @@ int main() {
 
 	/* Now, to test the Graph.anyFlightPlan(...) function */
 
-	cout << endl;
-	cout << "Now to test Graph.anyFlightPlan(...) from Boston to Chicago" << endl;
-	vector<string> anyItenerary;
-	anyItenerary = flightGraph.anyFlightPlan("Boston", "Chicago");
+	// cout << endl;
+	// cout << "Now to test Graph.anyFlightPlan(...) from Boston to Chicago" << endl;
+	// vector<string> anyItenerary;
+	// anyItenerary = flightGraph.anyFlightPlan("Boston", "Chicago");
 
-	for (string s : anyItenerary) {
-		cout << s << endl;
-	}
+	// for (string s : anyItenerary) {
+	// 	cout << s << endl;
+	// }
+
+	/* Now, to test the Graph.earliestFlightPlan(...) function */
+	cout << endl << "Now to test Graph.earliestFlightPlan(...) from Boston to Chicago" << endl;
+	flightGraph.earliestFlightPlan("Boston", "Chicago");
 
 }

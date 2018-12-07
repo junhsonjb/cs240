@@ -93,3 +93,10 @@ bool Time::operator!=(Time other) {
 	return !(operator==(other));
 
 }
+
+ostream & operator<<(ostream & out, const Time & time) {
+
+	out << time.hours << ":" << time.minutes << time.meridiem;
+	return out;
+
+}

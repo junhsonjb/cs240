@@ -233,75 +233,91 @@ vector<string> Graph::anyFlightPlan(string start, string end) {
 // comparison struct for priority queue
 struct compare {
 
-	bool operator() (float left, float right) {
-		return left > right;
+	bool operator() (Node left, Node right) {
+		return left.dTime > right.dTime;
 	}
 
 };
 
 void Graph::earliestFlightPlan(string start, string end) {
 
-	int startnum = cityMap[start];
-	int endnum = cityMap[end];
+	int startnum = cityMap[start]; // the number corresponding to the starting city
+	int endnum = cityMap[end]; // the number corresponding to the ending city
 
-	Node * startnode = mapNode(startnum);
-	Node * endnode = mapNode(endnum);
+	Node * startnode = mapNode(startnum); // a Node ptr to the starting city
+	Node * endnode = mapNode(endnum); // a Node ptr to the ending city
 
-	// MUST WRITE THIS FUNCTION
-	// AND DETERMINE IF IT SHOULD TAKE 
-	// A NODE OR A POINTER TO A NODE (should take pointer)
-	initSingleSource(startnode);
+	initSingleSource(startnode); // initialize the graph
 
 	vector<Node> finalWeights; // might be returning this vector
-	priority_queue< Node, vector<Node>, greater<vector<Node>::value_type> > nodepq;
-	vector<Node> pq; // use this vector as a priority queue
+	priority_queue< Node, vector<Node>, compare > nodepq; // priority queue for algorithm
 
 	/* Add all Nodes into nodepq */
+	// iterators to traverse allNodes
 	vector<Node>::iterator it;
 	vector<Node>::iterator front = allNodes.begin();
 	vector<Node>::iterator back = allNodes.end();
 
+	// add each Node from allNodes to the priority queue nodepq
 	for (it = front; it != back; it++) {
-		pq.push(*it);
+		nodepq.push(*it);
 	}
-
-	// make sure pq is a priority queue
-	make_heap(pq.begin(), pq.end());
-	reverse(pq.begin(), pq.end());
 
 	Node * current;
 
 	while (!nodepq.empty()) {
 
 		current = (Node *) &(nodepq.top());
-		nodepq.pop(); // get rid of the Node that we just stored
+		cout << "about to remove: " << current->cityName << " from the queue (dTime: " << current->dTime << ")" <<  endl;
 
-		finalWeights.push_back(*current);
+		//finalWeights.push_back(*current);
 
-		/* for each vertex, called vertex that is adjacent to current ... */
+		/* for each vertex called vertex that is adjacent to current ... */
 		vector<Edge>::iterator first = current->adjacents.begin();
 		vector<Edge>::iterator last = current->adjacents.end();
 		vector<Edge>::iterator eit;
 		Node * vertex;
 
+	    cout << "for loop checking all adjacent edges" << endl;
 		for (eit = first; eit != last; eit++) {
-
 			vertex = mapNode(eit->destination);
-			// MUST WRITE THIS FUNCTION
-			// AND ENSURE YOU ARE USING THE RIGHT WEIGHT VALUE!!!
-			// (should take pointer)
-			relax(current, vertex, eit->arrivalTime);
+            cout << "  Checking flight from " << current->cityName << " to " << vertex->cityName << " arriving at " << eit->arrivalTime << endl;
+			// ENSURE YOU ARE USING THE RIGHT WEIGHT VALUE!!!
+			// you probably are now (went to office hours)
+			Time zeroTime(0, 0, "am");
+			if (eit->departureTime < current->dTime || current->dTime == zeroTime) {
+				cout << "   Calling relax(...) function" << endl;
+				relax(current, vertex, &(*eit));
+				cout << "new vertex->dTime: " << vertex->dTime << " (" << vertex->cityName << ")" << endl;
+			}
+            else {
+                cout << "   Not able to take that flight." << endl;
+            }
 
+
+		}
+
+		finalWeights.push_back(*vertex);
+
+		cout << vertex->cityName << "->dTime has been updated to " << vertex->dTime << endl; //
+		nodepq.pop(); // get rid of the Node that we just stored
+
+		bool visitedEnd = find(finalWeights.begin(), finalWeights.end(), *endnode) != finalWeights.end();
+		if (visitedEnd) {
+			break;
 		}
 
 	}
 
 	// If you end up returning finalWeights, do it here
+
+	/* This is just for testing */
 	// print the contents of finalWeights here just to check, then do above if it's right
 	// Which it will be.
+	cout << endl << "PRINTING CONTENTS OF finalWeights" << endl;
 	for (int i = 0; i < finalWeights.size(); i++) {
 
-		cout << finalWeights[i].cityName << endl;
+		cout << finalWeights[i].cityName << " dTime: " << finalWeights[i].dTime << endl;
 
 	}
 
@@ -316,22 +332,25 @@ void Graph::initSingleSource(Node * source) {
 		// set all Nodes in allNodes to have distance = infinity
 		// and to have predecessor = -1
 
-		it->distance = numeric_limits<double>::infinity();
+		Time infinity(100, 100, "pm"); //arbitrary value for infinite time
+		it->dTime = infinity;
 		it->predecessor = -1;
 		// it->color is not used in this algorithm
 
 	}
 
 	// Then set distance of source to 0
-	source->distance = 0;
+	source->dTime = Time(0, 0, "am");
 
 }
 
-void Graph::relax(Node * start, Node * end, Time weight) {
+void Graph::relax(Node * start, Node * end, Edge * weight) {
 
-	if (end->distance > ( (float) weight.hours + (float) (weight.minutes / 60.0) )) {
+	if (end->dTime > weight->arrivalTime) {
 
-		end->distance = start->distance + ( (float) weight.hours + (float) (weight.minutes / 60.0) );
+		cout << "Updating dTime for " << end->cityName << " to " << weight->arrivalTime << endl;
+		end->dTime = weight->arrivalTime;
+		cout << end->cityName << "->dTime has been updated to " << end->dTime << endl;
 		end->predecessor = cityMap[start->cityName];
 
 	}

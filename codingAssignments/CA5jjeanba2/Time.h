@@ -25,6 +25,8 @@ class Time {
 		bool operator==(Time other);
 		bool operator!=(Time other);
 
+		friend ostream & operator<<(ostream & out, const Time & time);
+
 };
 
 #endif
