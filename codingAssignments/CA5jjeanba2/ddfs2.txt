@@ -1,0 +1,10 @@
+Boston Philadelphia 10:12am 11:34am $129
+Boston Philadelphia 01:10pm 02:14pm $139
+Boston Philadelphia 06:44pm 08:02pm $159
+Philadelphia Boston 09:10am 11:14am $99
+Philadelphia Boston 06:44pm 08:02pm $99
+NewYork Chicago 12:01pm 12:21pm $41
+NewYork Chicago 12:01pm 04:41pm $100
+Chicago NewYork 01:41pm 02:42pm $41
+Boston NewYork 08:00am 11:00am $24
+Chicago Philadelphia 12:00pm 01:22pm $42

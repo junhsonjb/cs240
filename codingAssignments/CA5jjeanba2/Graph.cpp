@@ -239,7 +239,7 @@ struct compare {
 
 };
 
-void Graph::earliestFlightPlan(string start, string end) {
+vector<Node> Graph::earliestFlightPlan(string start, string end) {
 
 	int startnum = cityMap[start]; // the number corresponding to the starting city
 	int endnum = cityMap[end]; // the number corresponding to the ending city
@@ -297,15 +297,24 @@ void Graph::earliestFlightPlan(string start, string end) {
 
 		}
 
+		cout << "ABOUT TO ADD " << vertex->cityName << " TO finalWeights" << endl;
 		finalWeights.push_back(*vertex);
 
 		cout << vertex->cityName << "->dTime has been updated to " << vertex->dTime << endl; //
 		nodepq.pop(); // get rid of the Node that we just stored
 
-		bool visitedEnd = find(finalWeights.begin(), finalWeights.end(), *endnode) != finalWeights.end();
-		if (visitedEnd) {
+		if (current->cityName == endnode->cityName) {
+			cout << "WE HAVE REACHED THE DESTINATION" << endl;
 			break;
 		}
+
+		cout << "this city: " << current->cityName << endl;
+		cout << "end city: " << endnode->cityName << endl;
+
+		// bool visitedEnd = find(finalWeights.begin(), finalWeights.end(), *endnode) != finalWeights.end();
+		// if (visitedEnd) {
+		// 	break;
+		// }
 
 	}
 
@@ -321,6 +330,18 @@ void Graph::earliestFlightPlan(string start, string end) {
 
 	}
 
+	reverse(finalWeights.begin(), finalWeights.end());
+	reverse(finalWeights.begin() + 1, finalWeights.end());
+
+	cout << endl << "ONCE AGAIN PRINTING CONTENTS OF finalWeights" << endl;
+	for (int i = 0; i < finalWeights.size(); i++) {
+
+		cout << finalWeights[i].cityName << " dTime: " << finalWeights[i].dTime << endl;
+
+	}
+
+	return finalWeights;
+	
 }
 
 void Graph::initSingleSource(Node * source) {

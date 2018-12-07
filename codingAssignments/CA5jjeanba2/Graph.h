@@ -21,7 +21,7 @@ class Graph {
 		Node * mapNode(int cityNum); // return Node based off of #
 		string mapstring(int cityNum); // return cityName from #
 		vector<string> anyFlightPlan(string start, string end);
-		void earliestFlightPlan(string start, string end);
+		vector<Node> earliestFlightPlan(string start, string end);
 		void initSingleSource(Node * source);
 		void relax(Node * start, Node * end, Edge * weight);
 };
